@@ -28,6 +28,3 @@ audio_list <- list(
 
 # spectro(segments$PAWR, flim = c(1, 10)) #Visualize segments. All except for PAWR call freq around 6kHz, with background noise being up to 2kHz.
 # listen(pawr_seg) #Note this difference is likely due to loud footsteps in PAWR recording, while others are cleaner. I wonder if later we will find it useful to omit frequencies greater than ~10kHz?
-
-
-
