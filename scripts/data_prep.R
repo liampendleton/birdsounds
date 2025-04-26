@@ -3,10 +3,13 @@ library(tuneR)
 library(seewave)
 
 #Read in bird .wav files
-pawr <- readWave(here("data", "audio", "pacific_wren.wav"))
-amro <- readWave(here("data", "audio", "american_robin.wav"))
-nofl <- readWave(here("data", "audio", "northern_flicker.wav"))
-sosp <- readWave(here("data", "audio", "song_sparrow.wav"))
+pawr <- readWave(here("data", "training_audio", "pacific_wren.wav"))
+amro <- readWave(here("data", "training_audio", "american_robin.wav"))
+nofl <- readWave(here("data", "training_audio", "northern_flicker.wav"))
+sosp1 <- readWave(here("data", "training_audio", "song_sparrow.wav"))
+sosp2 <- readWave(here("data", "training_audio", "song_sparrow2.wav"))
+sosp3 <- readWave(here("data", "training_audio", "song_sparrow3.wav"))
+bewr <- readWave(here("data", "training_audio", "berwicks_wren.wav"))
 
 #Visualize via spectrogram
 # spectro(nofl, flim = c(1, 10)) #We can see where there is general background noise and also where the call *probably* is
@@ -16,14 +19,19 @@ sosp <- readWave(here("data", "audio", "song_sparrow.wav"))
 pawr_seg <- cutw(pawr, from = 18, to = 23, output = "Wave")
 amro_seg <- cutw(amro, from = 1, to = 6, output = "Wave")
 nofl_seg <- cutw(nofl, from = 8, to = 13, output = "Wave")
-sosp_seg <- cutw(sosp, from = 4, to = 9, output = "Wave")
+sosp_seg <- cutw(sosp1, from = 4, to = 9, output = "Wave")
+sosp2_seg <- cutw(sosp2, from = 1, to = 4, output = "Wave")
+sosp3_seg <- cutw(sosp3, from = 7.75, to = 11, output = "Wave")
+bewr_seg <- cutw(bewr, from = 0.25, to = 2.25, output = "Wave")
+
 
 #Throw those into a list
 audio_list <- list(
-  PAWR = pawr_seg,
-  AMRO = amro_seg,
-  NOFL = nofl_seg,
-  SOSP = sosp_seg
+  AMRO = list(amro_seg),
+  SOSP = list(sosp_seg, sosp2_seg, sosp3_seg),
+  NOFL = list(nofl_seg),
+  PAWR = list(pawr_seg),
+  BEWR = list(bewr_seg)
 )
 
 # spectro(segments$PAWR, flim = c(1, 10)) #Visualize segments. All except for PAWR call freq around 6kHz, with background noise being up to 2kHz.
