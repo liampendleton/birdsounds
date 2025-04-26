@@ -16,12 +16,14 @@ pawr_seg <- cutw(pawr, from = 18, to = 23, output = "Wave") #This section contai
 spectro(pawr_seg, flim = c(1, 10)) #Visualize new frame
 listen(pawr_seg) #duh
 
-#Extract MFCCs
+#Extract MFCCs from 5-second clip
 pawr_mfcc <- melfcc(pawr_seg,
-                    nbands = 20, #basically resolution
+                    nbands = 20, #Basically resolution
                     wintime = 0.025, #Each column is going to be a visualization of 25 milliseconds
                     hoptime = 0.01, #Seconds between windows/steps. Overlap to reduce data loss and account for sounds that occur near boundaries of each window
-                    numcep = 13) #
+                    numcep = 13) #First column is coefficient describing energy of the sound in that 0.025sec window. 
+                                 #Remaining columns show formants/distinct frequency patterns
+                                 #The brighter the color, the higher the amplitude
 
 dim(pawr_mfcc)
 head(pawr_mfcc)
@@ -29,9 +31,8 @@ head(pawr_mfcc)
 #Visualize MFCCs
 image.plot(t(pawr_mfcc),
            main = "MFCCs from Pacific Wren Call",
-           xlab = "Time Frame",
-           ylab = "Mel-freq cepstral coefficient",
+           xlab = "Time",
+           ylab = "Mel-Frequency Cepstral Coefficient",
            col = viridis(100))
-
 
 
