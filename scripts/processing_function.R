@@ -30,5 +30,8 @@ process_wav <- function(audio_list,
   
   mfcc_data <- bind_rows(mfcc_list)
   colnames(mfcc_data)[1:numcep] <- paste0("MFCC_", 1:numcep) #Rename cols
+  
+  mfcc_data[1:numcep] <- scale(mfcc_data[1:numcep])  # Normalize across all samples
+  
   return(mfcc_data)
 }
