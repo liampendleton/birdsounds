@@ -8,10 +8,10 @@ process_wav <- function(audio_list,
                         hoptime = 0.01, #Seconds between windows/steps. Overlap to reduce data loss and account for sounds that occur near boundaries of each window, allowing for more continuous transition between steps
                         numcep = 13) {#First column is coefficient describing "energy" of the sound in that 0.025sec window.
   
-  #Loop through each species
+  #Loop through each species in library
   mfcc_list <- lapply(names(audio_list), function(species) {
     
-    #Loop through each clip for given species
+    #Loop through each clip for each species
     clips <- audio_list[[species]]
     clip_mfccs <- lapply(clips, function(clip) {
             mfcc <- melfcc(clip,

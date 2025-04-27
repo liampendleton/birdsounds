@@ -5,7 +5,7 @@ library(ggplot2)
 library(randomForest)
 
 source(here("Scripts", "processing_function.R"))
-source(here("Scripts", "data_prep.R"))
+source(here("Scripts", "bird_library.R"))
 
 mfcc_data <- process_wav(audio_list)
 
@@ -51,5 +51,5 @@ varImpPlot(birdid_model)
 #Moving forward maybe I can consider fewer MFCCs to simplify things and potentially improve model performance
 
 print(birdid_model) #As of 4/26/25, BEWR has highest misclassification rate, which is unsurprising. Incorporate more data as I collect it
-saveRDS(birdid_model, file = here("data", "output", "birdid_model.rds"))
+# saveRDS(birdid_model, file = here("data", "output", "birdid_model.rds"))
                                                      
